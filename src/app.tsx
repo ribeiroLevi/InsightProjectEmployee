@@ -4,6 +4,7 @@ import { Menu } from 'lucide-react';
 import { Search } from 'lucide-react';
 import { Employee } from './components/employee';
 import { NewEmployee } from './components/newEmployee';
+import { useState, ChangeEvent } from 'react';
 
 interface Employee {
   id: string;
@@ -11,11 +12,60 @@ interface Employee {
   email: string;
   role: string;
   department: string;
-  status: boolean;
-  employeeSince: Date;
+  status: string;
+  employeeSince: string;
 }
 
 export function App() {
+  const [employee, setEmployee] = useState<Employee[]>(() => {
+    const employeesOnStorage = localStorage.getItem('employees');
+
+    if (employeesOnStorage) {
+      return JSON.parse(employeesOnStorage);
+    }
+    return [];
+  });
+  const [search, setSearch] = useState('');
+
+  const onNewEmployeeCreated = (
+    name: string,
+    email: string,
+    role: string,
+    department: string,
+    status: string,
+    employeeSince: string
+  ) => {
+    console.log('active');
+    const newEmployee = {
+      id: crypto.randomUUID(),
+      name,
+      email,
+      role,
+      department,
+      status,
+      employeeSince,
+    };
+
+    const employeesArray = [newEmployee, ...employee];
+
+    setEmployee(employeesArray);
+    localStorage.setItem('employee', JSON.stringify(employeesArray));
+    console.log(employeesArray);
+  };
+
+  function handleSearch(event: ChangeEvent<HTMLInputElement>) {
+    const query = event.target.value;
+
+    setSearch(query);
+  }
+
+  const filteredEmployees =
+    search !== ' '
+      ? employee.filter((employee) =>
+          employee.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        )
+      : employee;
+
   return (
     <div>
       <nav className="w-full border-2 flex justify-center">
@@ -28,6 +78,7 @@ export function App() {
         <form action="" className="flex mt-10 w-[85%] items-center">
           <Search className="stroke-gray-400 mr-2" />
           <input
+            onChange={handleSearch}
             type="text"
             placeholder="Search"
             className="w-1/2 h-10 bg-gray-400 opacity-40 border-2 rounded-md indent-5 placeholder:text-black placeholder:indent-5"
@@ -37,14 +88,15 @@ export function App() {
       <div className="flex w-full justify-center mt-11">
         <div className="flex w-[85%] justify-between">
           <h1 className="text-4xl">Members</h1>
-          <NewEmployee />
+          <NewEmployee onNewEmployeeCreated={onNewEmployeeCreated} />
         </div>
       </div>
       <div className="flex w-full justify-center">
         <div className="w-[85%] mt-4 rounded-md">
           <div>
-            <Employee />
-            <Employee />
+            {filteredEmployees.map((employee) => {
+              return <Employee key={employee.id} employee={employee} />;
+            })}
           </div>
         </div>
       </div>
