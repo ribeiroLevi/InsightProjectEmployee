@@ -1,7 +1,6 @@
 import './main.css';
 import Logo from './assets/lookioLogo.svg';
-import { Menu } from 'lucide-react';
-import { Search } from 'lucide-react';
+import { Menu, Search } from 'lucide-react';
 import { Employee } from './components/employee';
 import { NewEmployee } from './components/newEmployee';
 import { useState, ChangeEvent } from 'react';
@@ -49,7 +48,8 @@ export function App() {
     const employeesArray = [newEmployee, ...employee];
 
     setEmployee(employeesArray);
-    localStorage.setItem('employee', JSON.stringify(employeesArray));
+    localStorage.setItem('employees', JSON.stringify(employeesArray));
+
     console.log(employeesArray);
   };
 
@@ -66,6 +66,13 @@ export function App() {
         )
       : employee;
 
+  function onEmployeeRemove(id: string) {
+    const employeesArray = employee.filter((note) => {
+      return note.id !== id;
+    });
+    setEmployee(employeesArray);
+    localStorage.setItem('employees', JSON.stringify(employeesArray));
+  }
   return (
     <div>
       <nav className="w-full border-2 flex justify-center">
@@ -95,7 +102,13 @@ export function App() {
         <div className="w-[85%] mt-4 rounded-md">
           <div>
             {filteredEmployees.map((employee) => {
-              return <Employee key={employee.id} employee={employee} />;
+              return (
+                <Employee
+                  key={employee.id}
+                  employee={employee}
+                  onEmployeeRemove={onEmployeeRemove}
+                />
+              );
             })}
           </div>
         </div>
