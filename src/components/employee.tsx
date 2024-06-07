@@ -1,9 +1,10 @@
-import { EllipsisVertical, Pencil, Trash2 } from 'lucide-react';
+import { EllipsisVertical, Trash2 } from 'lucide-react';
 import { Dropdown, Space } from 'antd';
 import type { MenuProps } from 'antd';
 import { ViewEmployee } from './viewEmployee';
-
-interface EmployeeProps {
+import { EditEmployee } from './editEmployee';
+import { EmployeeFormData } from './newEmployee';
+export interface EmployeeProps {
   employee: {
     id: string;
     name: string;
@@ -13,28 +14,44 @@ interface EmployeeProps {
     status: string;
     employeeSince: string;
   };
-  onEmployeeRemove: (id: string) => void;
+  onEmployeeRemove?: (id: string) => void;
+  onEmployeeUpdated: (updatedData: EmployeeFormData) => void;
 }
 
-const items: MenuProps['items'] = [
-  {
-    key: '1',
-    label: 'Edit Employee',
-    icon: <Pencil />,
-  },
-  {
-    key: '2',
-    danger: true,
-    label: 'Remove Employee',
-    icon: <Trash2 />,
-  },
-];
+export function Employee({
+  employee,
+  onEmployeeRemove,
+  onEmployeeUpdated,
+}: EmployeeProps) {
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: 'Edit Employee',
+      icon: (
+        <EditEmployee
+          employee={employee}
+          onEmployeeRemove={onEmployeeRemove}
+          onEmployeeUpdated={onEmployeeUpdated}
+        />
+      ),
+    },
+    {
+      key: '2',
+      danger: true,
+      label: 'Remove Employee',
+      icon: <Trash2 />,
+    },
+  ];
 
-export function Employee({ employee, onEmployeeRemove }: EmployeeProps) {
   const onClick: MenuProps['onClick'] = ({ key }) => {
     if (key == '1') {
+      <EditEmployee
+        employee={employee}
+        onEmployeeRemove={onEmployeeRemove}
+        onEmployeeUpdated={onEmployeeUpdated}
+      />;
     } else {
-      onEmployeeRemove(employee.id);
+      onEmployeeRemove && onEmployeeRemove(employee.id);
     }
   };
 
