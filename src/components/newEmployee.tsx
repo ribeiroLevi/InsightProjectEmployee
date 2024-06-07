@@ -65,6 +65,7 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
       console.log('input empty');
       return;
     }
+
     onNewEmployeeCreated(name, email, role, department, status, employeeSince);
     setFormData({
       name: '',
@@ -74,6 +75,7 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
       status: '',
       employeeSince: '',
     });
+
     setOpen(false);
   };
 
@@ -90,7 +92,7 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
     console.log('Selected Date:', dateString);
     setFormData({
       ...formData,
-      employeeSince: dateString,
+      employeeSince: dateString.toString(),
     });
   };
 
@@ -160,6 +162,7 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
                 size="large"
                 onChange={handleDateChange}
                 maxDate={dayjs()}
+                defaultOpenValue={dayjs()}
               />
             </div>
             <div className="flex flex-col mr-6">

@@ -42,15 +42,17 @@ export function ViewEmployee({ employee }: EmployeePropsView) {
             <h1 className="text-4xl font-bold ">{employee.name}</h1>
             <p className="text-2xl font-light">{employee.role}</p>
           </div>
-          <div>
-            <p>Employee since</p>
+          <div className="flex flex-row gap-11">
             <div>
-              <p className="text-3xl">{employee.employeeSince}</p>
+              <p>Employee since</p>
+              <p className="text-3xl">{employee.employeeSince.slice(4, 16)}</p>
+            </div>
+            <div>
+              <p>Department</p>
+              <p className="text-3xl">{employee.department}</p>
             </div>
           </div>
-
-          <p className="text-3xl">{employee.department}</p>
-          <div className="flex flex-row gap-11">
+          <div className="flex flex-row gap-11 mb-3">
             <div>
               <p>Email</p>
               <p className="text-3xl">{employee.email}</p>
