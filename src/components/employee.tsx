@@ -57,9 +57,9 @@ export function Employee({
 
   return (
     <div className="mt-3">
-      <div className="w-full bg-opacity-45 rounded-lg border-2 flex flex-row justify-around items-center">
+      <div className="md:w-full bg-opacity-45 rounded-lg border-2 flex flex-row justify-around items-center md:px-0 px-3">
         <ViewEmployee employee={employee} />
-        <div className="w-5/6 grid grid-cols-4 items-center h-full py-2 rounded-md flex-wrap">
+        <div className="md:grid-cols-4 md:gap-3 grid-cols-2 sm:grid-cols-3 w-5/6 grid items-center h-full py-2 rounded-md flex-wrap">
           <div className="grid gap-8">
             <div className="flex flex-row gap-3 items-center w-full">
               <div className="w-[60px] h-[60px] border-gray-200 border-2 rounded-full">
@@ -81,7 +81,7 @@ export function Employee({
               </div>
             </div>
           </div>
-          <div>
+          <div className=" hidden md:block">
             <th className="opacity-60">Email</th>
             <p>{employee.email}</p>
           </div>
@@ -89,8 +89,8 @@ export function Employee({
             <th className="opacity-60">Role</th>
             <p>{employee.role}</p>
           </div>
-          <div>
-            <th className="opacity-60">Department</th>
+          <div className="hidden sm:block">
+            <th className="opacity-60 ">Department</th>
             <p>{employee.department}</p>
           </div>
         </div>
@@ -102,7 +102,7 @@ export function Employee({
         >
           <a onClick={(e) => e.preventDefault()} className="w-2">
             <Space>
-              <EllipsisVertical className="stroke-gray-600 cursor-pointer" />
+              <EllipsisVertical className="stroke-gray-600 cursor-pointer " />
             </Space>
           </a>
         </Dropdown>
