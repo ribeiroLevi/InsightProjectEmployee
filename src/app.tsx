@@ -2,7 +2,7 @@ import './main.css';
 import Logo from './assets/lookioLogo.svg';
 import { Menu, Search } from 'lucide-react';
 import { Employee } from './components/employee';
-import { NewEmployee } from './components/newEmployee';
+import { EmployeeFormData, NewEmployee } from './components/newEmployee';
 import { useState, ChangeEvent } from 'react';
 
 interface Employee {
@@ -73,6 +73,15 @@ export function App() {
     setEmployee(employeesArray);
     localStorage.setItem('employees', JSON.stringify(employeesArray));
   }
+
+  function onEmployeeUpdate(updatedEmployee: EmployeeFormData) {
+    const updatedEmployees = employee.map((employee) =>
+      employee.id === updatedEmployee.id ? updatedEmployee : employee
+    );
+    setEmployee(updatedEmployees);
+    localStorage.setItem('employees', JSON.stringify(updatedEmployees));
+  }
+
   return (
     <div>
       <nav className="w-full border-2 flex justify-center">
@@ -88,7 +97,7 @@ export function App() {
             onChange={handleSearch}
             type="text"
             placeholder="Search"
-            className="w-1/2 h-10 bg-gray-400 opacity-40 border-2 rounded-md indent-5 placeholder:text-black placeholder:indent-5"
+            className="w-1/2 h-10 border-2 rounded-md indent-5 placeholder:text-black placeholder:indent-5"
           />
         </form>
       </div>
@@ -108,6 +117,7 @@ export function App() {
                     key={employee.id}
                     employee={employee}
                     onEmployeeRemove={onEmployeeRemove}
+                    onEmployeeUpdated={onEmployeeUpdate}
                   />
                 </div>
               );

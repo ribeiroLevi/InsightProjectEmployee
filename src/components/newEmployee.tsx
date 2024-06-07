@@ -13,12 +13,12 @@ interface NewEmployeeProps {
   ) => void;
 }
 
-interface Option {
+export interface Option {
   value: string;
   label: string;
 }
 
-const options: Option[] = [
+export const options: Option[] = [
   {
     value: 'Active',
     label: 'Active',
@@ -30,6 +30,7 @@ const options: Option[] = [
 ];
 
 export interface EmployeeFormData {
+  id: string;
   name: string;
   email: string;
   role: string;
@@ -41,6 +42,7 @@ export interface EmployeeFormData {
 export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState<EmployeeFormData>({
+    id: '',
     name: '',
     email: '',
     role: '',
@@ -68,6 +70,7 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
 
     onNewEmployeeCreated(name, email, role, department, status, employeeSince);
     setFormData({
+      id: '',
       name: '',
       email: '',
       role: '',
