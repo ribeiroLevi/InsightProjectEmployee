@@ -41,6 +41,7 @@ export interface EmployeeFormData {
 
 export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
   const [open, setOpen] = useState(false);
+  const regex = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
   const [formData, setFormData] = useState<EmployeeFormData>({
     id: '',
     name: '',
@@ -60,11 +61,23 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
 
   const handleSaveEmployee = (event: FormEvent) => {
     event.preventDefault();
-
     const { name, email, role, department, status, employeeSince } = formData;
 
-    if (formData.name === '') {
+    if (
+      formData.name === '' ||
+      formData.role === '' ||
+      formData.department === '' ||
+      formData.status === '' ||
+      formData.employeeSince === ''
+    ) {
+      alert('NOME VAZIO');
       console.log('input empty');
+      return;
+    }
+
+    if (!regex.test(formData.email.trim()) || formData.email === '') {
+      alert('EMAIL INVÁLIDO');
+      console.log('input empty', regex.test(formData.email), formData.email);
       return;
     }
 
