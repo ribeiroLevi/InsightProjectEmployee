@@ -59,12 +59,29 @@ export function App() {
     setSearch(query);
   }
 
-  const filteredEmployees =
-    search !== ' '
-      ? employee.filter((employee) =>
-          employee.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-        )
-      : employee;
+  const filteredEmployees = employee.filter((employee) => {
+    if (search !== '') {
+      const nameFilter = employee.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+      const departmentFilter = employee.department
+        .toLocaleLowerCase()
+        .includes(search.toLocaleLowerCase());
+
+      const roleFilter = employee.role
+        .toLocaleLowerCase()
+        .includes(search.toLocaleLowerCase());
+
+      const emailFilter = employee.email
+        .toLocaleLowerCase()
+        .includes(search.toLocaleLowerCase());
+
+      return nameFilter || departmentFilter || roleFilter || emailFilter;
+    } else {
+      return true;
+    }
+  });
 
   function onEmployeeRemove(id: string) {
     const employeesArray = employee.filter((note) => {

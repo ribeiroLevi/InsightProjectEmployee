@@ -57,15 +57,41 @@ export function EditEmployee({
 
   const handleSaveEmployee = (event: FormEvent) => {
     event.preventDefault();
-    if (formData.name === '') {
+    const regex = new RegExp(
+      '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'
+    );
+
+    if (
+      formData.name === '' ||
+      formData.role === '' ||
+      formData.department === '' ||
+      formData.status === '' ||
+      formData.employeeSince === ''
+    ) {
+      alert('NOME VAZIO');
       console.log('input empty');
       return;
     }
 
+    if (!regex.test(formData.email.trim()) || formData.email === '') {
+      alert('EMAIL INVÁLIDO');
+      console.log('input empty', regex.test(formData.email), formData.email);
+      return;
+    }
+
     onEmployeeUpdated(formData);
+    setFormData({
+      id: '',
+      name: '',
+      email: '',
+      role: '',
+      department: '',
+      status: '',
+      employeeSince: '',
+    });
+
     setOpen(false);
   };
-
   return (
     <div>
       <div className="flex flex-row" onClick={showModal}>
