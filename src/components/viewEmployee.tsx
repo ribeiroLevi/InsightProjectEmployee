@@ -36,6 +36,7 @@ export function ViewEmployee({ employee }: EmployeePropsView) {
         open={open}
         centered
         onOk={closeModal}
+        width={600}
       >
         <div className="flex flex-col gap-3">
           <div>
@@ -57,7 +58,7 @@ export function ViewEmployee({ employee }: EmployeePropsView) {
               <p>Email</p>
               <p className="text-3xl">{employee.email}</p>
             </div>
-            <div>
+            <div className="mr-6">
               <p>Status</p>
               <p className="text-3xl">{employee.status}</p>
             </div>

@@ -68,7 +68,10 @@ export function EditEmployee({
 
   return (
     <div>
-      <Pencil onClick={showModal} className="mr-2" />
+      <div className="flex flex-row" onClick={showModal}>
+        <Pencil className="mr-2" />
+        <p>Edit Employee</p>
+      </div>
       <Modal
         title="New Employee"
         open={open}

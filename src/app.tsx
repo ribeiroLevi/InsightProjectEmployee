@@ -97,7 +97,7 @@ export function App() {
             onChange={handleSearch}
             type="text"
             placeholder="Search"
-            className="w-1/2 h-10 bg-gray-400 opacity-40 border-2 rounded-md indent-5 placeholder:text-black placeholder:indent-5"
+            className="w-1/2 h-10 border-2 rounded-md indent-5 placeholder:text-black placeholder:indent-5"
           />
         </form>
       </div>
