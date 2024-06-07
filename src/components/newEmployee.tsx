@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Modal, DatePicker, Cascader } from 'antd';
+import dayjs from 'dayjs';
 
 interface NewEmployeeProps {
   onNewEmployeeCreated: (
@@ -28,7 +29,7 @@ const options: Option[] = [
   },
 ];
 
-interface EmployeeFormData {
+export interface EmployeeFormData {
   name: string;
   email: string;
   role: string;
@@ -47,7 +48,6 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
     status: '',
     employeeSince: '',
   });
-
   const showModal = () => {
     setOpen(true);
   };
@@ -58,6 +58,7 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
 
   const handleSaveEmployee = (event: FormEvent) => {
     event.preventDefault();
+
     const { name, email, role, department, status, employeeSince } = formData;
 
     if (formData.name === '') {
@@ -73,13 +74,23 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
       status: '',
       employeeSince: '',
     });
+    setOpen(false);
   };
 
   const handleContentChanged = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    console.log(event);
     setFormData({
       ...formData,
       [name]: value,
+    });
+  };
+
+  const handleDateChange = (dateString: string) => {
+    console.log('Selected Date:', dateString);
+    setFormData({
+      ...formData,
+      employeeSince: dateString,
     });
   };
 
@@ -147,7 +158,8 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
               <DatePicker
                 format={'DD/MM/YYYY'}
                 size="large"
-                onChange={handleStatusChange}
+                onChange={handleDateChange}
+                maxDate={dayjs()}
               />
             </div>
             <div className="flex flex-col mr-6">

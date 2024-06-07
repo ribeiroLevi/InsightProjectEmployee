@@ -103,11 +103,13 @@ export function App() {
           <div>
             {filteredEmployees.map((employee) => {
               return (
-                <Employee
-                  key={employee.id}
-                  employee={employee}
-                  onEmployeeRemove={onEmployeeRemove}
-                />
+                <div>
+                  <Employee
+                    key={employee.id}
+                    employee={employee}
+                    onEmployeeRemove={onEmployeeRemove}
+                  />
+                </div>
               );
             })}
           </div>

@@ -1,7 +1,7 @@
 import { EllipsisVertical, Pencil, Trash2 } from 'lucide-react';
-
 import { Dropdown, Space } from 'antd';
 import type { MenuProps } from 'antd';
+import { ViewEmployee } from './viewEmployee';
 
 interface EmployeeProps {
   employee: {
@@ -15,6 +15,7 @@ interface EmployeeProps {
   };
   onEmployeeRemove: (id: string) => void;
 }
+
 const items: MenuProps['items'] = [
   {
     key: '1',
@@ -40,6 +41,7 @@ export function Employee({ employee, onEmployeeRemove }: EmployeeProps) {
   return (
     <div className="mt-3">
       <div className="w-full bg-opacity-45 rounded-lg border-2 flex flex-row justify-around items-center">
+        <ViewEmployee employee={employee} />
         <div className="w-5/6 grid grid-cols-4 items-center h-[80px] rounded-md">
           <div className="grid gap-8">
             <div className="grid grid-cols-2 items-center w-36">
