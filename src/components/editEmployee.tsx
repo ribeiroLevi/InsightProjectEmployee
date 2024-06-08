@@ -82,6 +82,7 @@ export function EditEmployee({
 
     onEmployeeUpdated(formData);
     setFormData({
+      id: '',
       name: '',
       email: '',
       role: '',

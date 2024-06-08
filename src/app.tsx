@@ -1,6 +1,6 @@
 import './main.css';
 import Logo from './assets/lookioLogo.svg';
-import { Menu, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { Employee } from './components/employee';
 import { EmployeeFormData, NewEmployee } from './components/newEmployee';
 import { useState, ChangeEvent } from 'react';
@@ -104,7 +104,6 @@ export function App() {
       <nav className="w-full border-2 flex justify-center">
         <div className="w-[85%] h-[54px] flex justify-between items-center">
           <img src={Logo} alt="" />
-          <Menu />
         </div>
       </nav>
       <div className="flex w-full justify-center">
