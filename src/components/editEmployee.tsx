@@ -156,7 +156,7 @@ export function EditEmployee({
                 defaultOpenValue={dayjs()}
               />
             </div>
-            <div className="flex flex-col mr-6">
+            <div className="flex flex-col">
               <p>Status</p>
               <Cascader
                 options={options}

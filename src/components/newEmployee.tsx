@@ -172,7 +172,7 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
           </div>
           <div className="md:flex md:flex-rol grid grid-cols-2 w-full gap-11 md:gap-6 items-end sm:item-end">
             <div className="flex flex-col">
-              <p className="md:w-full w-16">Employee Since</p>
+              <p>Employee Since</p>
               <DatePicker
                 format={'DD/MM/YYYY'}
                 size="large"
