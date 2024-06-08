@@ -35,6 +35,8 @@ export function ViewEmployee({ employee }: EmployeePropsView) {
         title={'id: ' + employee.id}
         open={open}
         centered
+        cancelButtonProps={{ style: { display: 'none' } }}
+        closeIcon={null}
         onOk={closeModal}
         width={600}
       >
