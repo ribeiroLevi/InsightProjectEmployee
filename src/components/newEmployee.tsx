@@ -30,7 +30,7 @@ export const options: Option[] = [
 ];
 
 export interface EmployeeFormData {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   role: string;

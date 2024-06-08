@@ -57,6 +57,7 @@ export function EditEmployee({
 
   const handleSaveEmployee = (event: FormEvent) => {
     event.preventDefault();
+
     const regex = new RegExp(
       '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'
     );
@@ -81,7 +82,6 @@ export function EditEmployee({
 
     onEmployeeUpdated(formData);
     setFormData({
-      id: '',
       name: '',
       email: '',
       role: '',
@@ -90,8 +90,11 @@ export function EditEmployee({
       employeeSince: '',
     });
 
+    console.log(employee.id, formData);
     setOpen(false);
+    location.reload();
   };
+
   return (
     <div>
       <div className="flex flex-row" onClick={showModal}>
@@ -99,7 +102,7 @@ export function EditEmployee({
         <p>Edit Employee</p>
       </div>
       <Modal
-        title="New Employee"
+        title="Edit Informations"
         open={open}
         onCancel={closeModal}
         centered
