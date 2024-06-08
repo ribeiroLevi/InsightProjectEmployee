@@ -145,7 +145,7 @@ export function EditEmployee({
               onChange={handleContentChanged}
             />
           </div>
-          <div className="flex w-1/2  justify-between">
+          <div className="md:flex md:flex-rol grid grid-cols-2 w-full gap-11 md:gap-6 items-end sm:item-end">
             <div className="flex flex-col">
               <p>Employee Since</p>
               <DatePicker
