@@ -125,7 +125,7 @@ export function NewEmployee({ onNewEmployeeCreated }: NewEmployeeProps) {
         className="bg-green-500 w-[140px] h-11 rounded-md text-white font-bold"
         onClick={showModal}
       >
-        New Employees
+        New Employee
       </button>
       <Modal
         title="New Employee"
